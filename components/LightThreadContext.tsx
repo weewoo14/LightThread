@@ -1,13 +1,18 @@
 "use client";
-import { allDataGWOSCContext, allDataGWOSCType } from "@/types/GWSOC";
+import { allDataGWOSCContext, allDataGWOSCType } from "@/types/GWOSC";
+import { allDataIceCubeContext, iceCubeDataType } from "@/types/IceCube";
 import { createContext, useState, useEffect, useContext } from "react";
 
-const AppStateContext = createContext<allDataGWOSCContext>({
+type lightThreadContext = allDataGWOSCContext & allDataIceCubeContext;
+
+const AppStateContext = createContext<lightThreadContext>({
   allDataGWOSC: [],
+  allDataIceCube: [],
 })
 
 export function LightThreadProvider({children} : {children: React.ReactNode}) {
   const [allDataGWOSC, setAllDataGWOSC] = useState<allDataGWOSCType[]>([]);
+  const [allDataIceCube, setAllDataIceCube] = useState<iceCubeDataType[]>([]);
 
   useEffect(() => {
 
@@ -34,11 +39,26 @@ export function LightThreadProvider({children} : {children: React.ReactNode}) {
       getAllDataGWOSC();
     }
 
+    async function getAllDataIceCube() {
+      const allDataIceCubeResponse = await fetch("/api/IceCube/AllData/GET");
+
+      if (!allDataIceCubeResponse.ok) {
+        const allDataIceCubeText = await allDataIceCubeResponse.text();
+        throw new Error(`GWSOC request failed (${allDataIceCubeResponse.status}) : ${allDataIceCubeText.slice(0, 200)}`);
+      }
+
+      const allDataIceCubeParseData = await allDataIceCubeResponse.json();
+      setAllDataIceCube(allDataIceCubeParseData);
+    }
+    if (allDataIceCube.length === 0) {
+      getAllDataIceCube();
+    }
+
 
   }, [])
 
   return (
-    <AppStateContext.Provider value={{allDataGWOSC}}>
+    <AppStateContext.Provider value={{allDataGWOSC, allDataIceCube}}>
       {children}
     </AppStateContext.Provider>
   );
