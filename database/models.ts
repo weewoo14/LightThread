@@ -1,4 +1,5 @@
 import { model, models, Schema } from "mongoose";
+import { streamToString } from "next/dist/server/app-render/stream-ops.web";
 
 const iceCubeDataSchema = new Schema({
   NAME: String,
@@ -17,10 +18,28 @@ const iceCubeDataSchema = new Schema({
   SIGNAL: Number,
 })
 
+const grbDataSchema = new Schema({
+  GRB: String,
+  Time: String,
+  Trigger_Number: [String, Number],
+  BAT_RA: Number,
+  BAT_Dec: Number,
+  BAT_Error_Radius: Number,
+  BAT_T90: Number,
+  BAT_Fluence: Number,
+  XRT_RA: String,
+  XRT_Dec: String,
+  XRT_Error_Radius: Number,
+  XRT_First_Observation: Number
+})
+
 const Models = {
   ICECUBEDATAMODEL:
     models.ICECUBEDATAMODEL ||
     model("IceCube", iceCubeDataSchema, "IceCube"),
+  GRBDATAMODEL:
+    models.GRBDATAMODEL ||
+    model("GRBDATA", grbDataSchema, "GRBDATA"),
 }
 
 export default Models;

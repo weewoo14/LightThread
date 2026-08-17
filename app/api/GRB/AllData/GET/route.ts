@@ -6,14 +6,14 @@ import Models from "@/database/models";
 export async function GET(request: NextRequest) {
   await mongoConnect();
 
-  const allDataIceCube = await Models.ICECUBEDATAMODEL.find({}, {_id: 0});
-  if (!allDataIceCube || allDataIceCube.length === 0) {
+  const allDataGRB = await Models.GRBDATAMODEL.find({}, {_id: 0});
+  if (!allDataGRB || allDataGRB.length === 0) {
     return NextResponse.json({
-      message: "AllDataIceCube could not be fetched from MongoDB",
+      message: "MongoDB GRB did not return anything"
     }, {
       status: 404
     })
   }
 
-  return NextResponse.json(allDataIceCube);
+  return NextResponse.json(allDataGRB);
 }

@@ -1,20 +1,38 @@
 "use client";
+import { allDataGRBContext, grbDataType } from "@/types/GRB";
 import { allDataGWOSCContext, allDataGWOSCType } from "@/types/GWOSC";
 import { allDataIceCubeContext, iceCubeDataType } from "@/types/IceCube";
 import { createContext, useState, useEffect, useContext } from "react";
 
-type lightThreadContext = allDataGWOSCContext & allDataIceCubeContext;
+type lightThreadContext = allDataGRBContext & allDataGWOSCContext & allDataIceCubeContext;
 
 const AppStateContext = createContext<lightThreadContext>({
+  allDataGRB: [],
   allDataGWOSC: [],
   allDataIceCube: [],
 })
 
 export function LightThreadProvider({children} : {children: React.ReactNode}) {
+  const [allDataGRB, setAllDataGRB] = useState<grbDataType[]>([]);
   const [allDataGWOSC, setAllDataGWOSC] = useState<allDataGWOSCType[]>([]);
   const [allDataIceCube, setAllDataIceCube] = useState<iceCubeDataType[]>([]);
 
   useEffect(() => {
+
+    async function getAllDataGRB() {
+      const allDataGRBResponse = await fetch("/api/GRB/AllData/GET");
+
+      if (!allDataGRBResponse.ok) {
+        const allDataGRBText = await allDataGRBResponse.text();
+        throw new Error(`GWSOC request failed (${allDataGRBResponse.status}) : ${allDataGRBText.slice(0, 200)}`);
+      }
+
+      const allDataGRBParseData = await allDataGRBResponse.json();
+      setAllDataGRB(allDataGRBParseData);
+    }
+    if (allDataGRB.length === 0) {
+      getAllDataGRB();
+    }
 
     // Getting all of the GWOSC 
     async function getAllDataGWOSC() {
@@ -58,7 +76,7 @@ export function LightThreadProvider({children} : {children: React.ReactNode}) {
   }, [])
 
   return (
-    <AppStateContext.Provider value={{allDataGWOSC, allDataIceCube}}>
+    <AppStateContext.Provider value={{allDataGRB, allDataGWOSC, allDataIceCube}}>
       {children}
     </AppStateContext.Provider>
   );
