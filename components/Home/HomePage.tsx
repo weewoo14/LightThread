@@ -1,13 +1,14 @@
 "use client";
 import { useLightThreadState } from "../LightThreadContext";
+import DropdownList from "../utils/DropdownList";
 
 export default function HomePage() {
-  const {allDataGWOSC} = useLightThreadState();
+  const {allDataGRB, allDataGWOSC, allDataIceCube} = useLightThreadState();
 
-  console.log(allDataGWOSC);
   return (
     <div className="flex flex-col">
       LightThread
+      <DropdownList eventType="GRB" data={allDataGRB}/>
     </div>
   );
 }

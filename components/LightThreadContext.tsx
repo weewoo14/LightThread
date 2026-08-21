@@ -24,7 +24,7 @@ export function LightThreadProvider({children} : {children: React.ReactNode}) {
 
       if (!allDataGRBResponse.ok) {
         const allDataGRBText = await allDataGRBResponse.text();
-        throw new Error(`GWSOC request failed (${allDataGRBResponse.status}) : ${allDataGRBText.slice(0, 200)}`);
+        throw new Error(`GRB request failed (${allDataGRBResponse.status}) : ${allDataGRBText.slice(0, 200)}`);
       }
 
       const allDataGRBParseData = await allDataGRBResponse.json();
@@ -41,7 +41,7 @@ export function LightThreadProvider({children} : {children: React.ReactNode}) {
 
       if (!allDataGWOSCResponse.ok) {
         const allDataGWOSCResponseText = await allDataGWOSCResponse.text();
-        throw new Error(`GWSOC request failed (${allDataGWOSCResponse.status}) : ${allDataGWOSCResponseText.slice(0, 200)}`);
+        throw new Error(`GWOSC request failed (${allDataGWOSCResponse.status}) : ${allDataGWOSCResponseText.slice(0, 200)}`);
       }
 
       const allDataGWOSCParseData = await allDataGWOSCResponse.json();

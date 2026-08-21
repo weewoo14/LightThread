@@ -39,7 +39,7 @@ const Models = {
     model("IceCube", iceCubeDataSchema, "IceCube"),
   GRBDATAMODEL:
     models.GRBDATAMODEL ||
-    model("GRBDATA", grbDataSchema, "GRBDATA"),
+    model("GRBCAT", grbDataSchema, "GRBCAT"),
 }
 
 export default Models;
