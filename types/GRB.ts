@@ -3,7 +3,7 @@ export type allDataGRBContext = {
 }
 
 export type grbDataType = {
-  GRB: string,
+  name: string,
   Time: string,
   Trigger_Number: string | number,
   BAT_RA: number,

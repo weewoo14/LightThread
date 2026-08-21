@@ -2,7 +2,7 @@ import { model, models, Schema } from "mongoose";
 import { streamToString } from "next/dist/server/app-render/stream-ops.web";
 
 const iceCubeDataSchema = new Schema({
-  NAME: String,
+  name: String,
   RUNID: Number,
   EVENTID: Number,
   START: String,
@@ -19,7 +19,7 @@ const iceCubeDataSchema = new Schema({
 })
 
 const grbDataSchema = new Schema({
-  GRB: String,
+  name: String,
   Time: String,
   Trigger_Number: [String, Number],
   BAT_RA: Number,

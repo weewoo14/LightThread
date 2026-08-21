@@ -8,7 +8,7 @@ export default function HomePage() {
   return (
     <div className="flex flex-col">
       LightThread
-      <DropdownList eventType="GRB" data={allDataGRB}/>
+      <DropdownList eventType="GRB" allData={allDataGRB}/>
     </div>
   );
 }

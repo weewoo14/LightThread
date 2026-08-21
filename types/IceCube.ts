@@ -3,7 +3,7 @@ export type allDataIceCubeContext = {
 }
 
 export type iceCubeDataType = {
-  NAME: string,
+  name: string,
   RUNID: number,
   EVENTID: number,
   START: string,
