@@ -9,6 +9,8 @@ export default function HomePage() {
     <div className="flex flex-col">
       LightThread
       <DropdownList eventType="GRB" allData={allDataGRB}/>
+      <DropdownList eventType="GWOSC" allData={allDataGWOSC}/>
+      <DropdownList eventType="IceCube" allData={allDataIceCube}/>
     </div>
   );
 }
