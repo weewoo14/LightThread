@@ -16,7 +16,7 @@ export async function POST(request: NextRequest) {
 
     await mongoConnect();
     const iceCubeData: iceCubeDataType = {
-      NAME: iceCubeDataResponse.NAME,
+      name: iceCubeDataResponse.NAME,
       RUNID: iceCubeDataResponse.RUNID,
       EVENTID: iceCubeDataResponse.EVENTID,
       START: iceCubeDataResponse.START,
