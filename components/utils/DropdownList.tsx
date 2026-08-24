@@ -5,9 +5,9 @@ import { allDataGWOSCType } from "@/types/GWOSC";
 import { iceCubeDataType } from "@/types/IceCube";
 import { getSearchResults } from "@/utils/SearchResultGeneration";
 
-type dropdownListDataType = grbDataType[] | allDataGWOSCType[] | iceCubeDataType[];
+type dropdownListAllDataType = grbDataType[] | allDataGWOSCType[] | iceCubeDataType[];
 
-export default function DropdownList({eventType, allData} : {eventType: string, allData: dropdownListDataType}) {
+export default function DropdownList({eventType, allData, handleSelection} : {eventType: string, allData: dropdownListAllDataType, handleSelection: (data: string) => void}) {
   const [searchBarText, setSearchBarText] = useState<string>("");
   const [isDropdownVisible, setIsDropdownVisible] = useState<boolean>(false);
 
@@ -31,7 +31,11 @@ export default function DropdownList({eventType, allData} : {eventType: string, 
         <ul className="w-[20vw]">
           {dropdownSearchResults.map((dataName, idx) => {
             return (
-              <li key={idx} className="h-[32px] border-1 border-white hover:bg-[gray] cursor-pointer">
+              <li
+                key={idx}
+                className="h-[32px] border-1 border-white hover:bg-[gray] cursor-pointer"
+                onClick={() => {handleSelection(dataName)}}
+              >
                 <p> {dataName} </p>
               </li>
             );
