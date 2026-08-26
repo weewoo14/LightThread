@@ -1,5 +1,4 @@
 import { model, models, Schema } from "mongoose";
-import { streamToString } from "next/dist/server/app-render/stream-ops.web";
 
 const iceCubeDataSchema = new Schema({
   name: String,
