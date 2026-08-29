@@ -25,7 +25,7 @@ export default function HomePage() {
 
   return (
     <div className="flex flex-row">
-      LightThread
+      <p>LIghtThread</p>
       <DropdownList eventType="GRB" allData={allDataGRB} handleSelection={handleGRBSelection}/>
       <DropdownList eventType="GWOSC" allData={allDataGWOSC} handleSelection={handleGWOSCSelection}/>
       <DropdownList eventType="IceCube" allData={allDataIceCube} handleSelection={handleIceCubeSelection}/>
