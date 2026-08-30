@@ -5,22 +5,32 @@ import { useState } from "react";
 import { useLightThreadState } from "../LightThreadContext";
 import DropdownList from "../utils/DropdownList";
 
+let grbSelection: string = "";
+let gwoscSelection: string = "";
+let iceCubeSelection: string = "";
+
 export default function HomePage() {
-  const [grbSelection, setGRBSelection] = useState<string>("");
-  const [gwoscSelection, setGWOSCSelection] = useState<string>("");
-  const [iceCubeSelection, setIceCubeSelection] = useState<string>("");
   const {allDataGRB, allDataGWOSC, allDataIceCube} = useLightThreadState();
 
   const handleGRBSelection: (dataName: string) => void = (dataName) => {
-    setGRBSelection(dataName);
+    grbSelection = dataName;
+    console.log(grbSelection);
+    console.log(gwoscSelection);
+    console.log(iceCubeSelection);
   }
 
   const handleGWOSCSelection: (dataName: string) => void = (dataName) => {
-    setGWOSCSelection(dataName);
+    gwoscSelection = dataName;
+    console.log(grbSelection);
+    console.log(gwoscSelection);
+    console.log(iceCubeSelection);
   }
 
   const handleIceCubeSelection: (dataName: string) => void = (dataName) => {
-    setIceCubeSelection(dataName);
+    iceCubeSelection = dataName;
+    console.log(grbSelection);
+    console.log(gwoscSelection);
+    console.log(iceCubeSelection);
   }
 
   return (
